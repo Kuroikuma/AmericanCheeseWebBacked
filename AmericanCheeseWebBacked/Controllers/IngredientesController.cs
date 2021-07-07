@@ -51,6 +51,22 @@ namespace AmericanCheeseWebBacked.Controllers
             }
         }
 
+        // GET api/<EmpleadoController>/5
+        [HttpGet("getName/{name}", Name = "GetNameIngredientes")]
+        public ActionResult Get(string name)
+        {
+            try
+            {
+                var SeleccionarIngredientes = context.Ingredientes.Where(i => i.Nombre.Equals(name));
+                return Ok(SeleccionarIngredientes);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
         // POST api/<EmpleadoController>
         [HttpPost]
         public ActionResult Post([FromBody] Ingredientes NewIngredientes)
