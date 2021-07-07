@@ -1,4 +1,5 @@
 ﻿using AmericanCheeseWebBacked.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,7 @@ namespace AmericanCheeseWebBacked.Controllers
             this.context = context;
         }
         // GET: api/<ProductoController>
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet]
         public ActionResult Get()
         {
@@ -34,9 +36,10 @@ namespace AmericanCheeseWebBacked.Controllers
                 return BadRequest(e.Message);
             }
         }
-      
+
 
         // GET api/<ProductoController>/5
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet("{id}", Name = "GetProducto")]
         public ActionResult Get(int id)
         {
@@ -53,23 +56,55 @@ namespace AmericanCheeseWebBacked.Controllers
         }
 
         // POST api/<ProductoController>
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPost]
         public ActionResult Post([FromBody] Producto newProducto)
         {
-            try
-            {
-                context.Producto.Add(newProducto);
-                context.SaveChanges();
-                return CreatedAtRoute("GetProducto", new { id = newProducto.IdProducto }, newProducto);
-            }
-            catch (Exception e)
-            {
+            Producto nuevo = new Producto();
+            
+            using (var dbTransContext= context.Database.BeginTransaction()) {
+                try
+                {
+                    
+                    nuevo.IdCategoria = newProducto.IdCategoria;
+                    nuevo.Nombre = newProducto.Nombre;
+                    nuevo.Tamaño = newProducto.Tamaño;
+                    nuevo.Precio = newProducto.Precio;
+                    nuevo.Imagen = newProducto.Imagen;
 
-                return BadRequest(e.Message);
+                    foreach (var item in newProducto.CrearProducto)
+                    {
+                        Ingredientes ingrediente = context.Ingredientes.FirstOrDefault(g => g.IdIngrediente == item.IdIngrediente);
+                        if (ingrediente==null){
+
+                                throw new Exception();
+                            }
+                        CrearProducto crearProducto = new CrearProducto();
+
+                        crearProducto.IdProducto = context.Producto.LastOrDefault().IdProducto+1;
+                        crearProducto.IdIngrediente = ingrediente.IdIngrediente;
+                        crearProducto.CantidadIngrediente = item.CantidadIngrediente;
+                        crearProducto.PrecioIngrediente = item.PrecioIngrediente;
+                        context.CrearProducto.Add(crearProducto);
+                    }
+
+                    context.Producto.Add(nuevo);
+                    context.SaveChanges();
+                    dbTransContext.Commit();
+                    
+                    return CreatedAtRoute("GetProducto", new { id = newProducto.IdProducto }, newProducto);
+                }
+                catch (Exception e)
+                {
+                    dbTransContext.Rollback();
+                    return BadRequest(e.Message);
+                }
             }
+           
         }
 
         // PUT api/<ProductoController>/5
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Producto newProducto)
         {
@@ -94,6 +129,7 @@ namespace AmericanCheeseWebBacked.Controllers
         }
 
         // DELETE api/<ProductoController>/5
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

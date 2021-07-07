@@ -29,22 +29,28 @@ namespace AmericanCheeseWebBacked.Controllers
         {
             try
             {
+                
                 //var SeleccionarProducto = context.Producto.Where(s => s.IdCategoria == id).ToList();
-                var SeleccionarProducto = context.Categoria.Where(s => s.IdCategoria == id)
-                    .Join(
-                        context.Producto,
-                        Categoria => Categoria.IdCategoria,
-                        Producto => Producto.IdCategoriaNavigation.IdCategoria,
-                        (Categoria, Producto) => new
-                        {
-                            Categoria = Categoria.Nombre,
-                            Producto = Producto.Nombre,
-                            Imagen =Producto.Imagen,
-                            Precio=Producto.Precio,
-                            Tamaño=Producto.Tamaño
+                var SeleccionarProducto = (from c in context.Categoria
+                                           join pd in context.Producto on c.IdCategoria equals pd.IdCategoria
+                                           where c.IdCategoria == id
+                                           select new
+                                           {
+                                               Categoria = c.Nombre,
+                                               Producto = pd.Nombre,
+                                               Imagen = pd.Imagen,
+                                               Precio = pd.Precio,
+                                               Tamaño = pd.Tamaño,
+                                               Ingrediente= (from cp in context.CrearProducto
+                                                             join p in context.Producto on cp.IdProducto equals p.IdProducto
+                                                             join i in context.Ingredientes on cp.IdIngrediente equals i.IdIngrediente
+                                                             where cp.IdProducto==pd.IdProducto
+                                                             select new
+                                                             {
+                                                                 Ingrediente = i.Nombre,
 
-                        }
-                    ).ToList();
+                                                             }).ToList()
+                                           }).ToList();
                 return Ok(SeleccionarProducto);
             }
             catch (Exception e)

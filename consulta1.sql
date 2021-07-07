@@ -61,6 +61,83 @@ insert into ingredientes ( Nombre,precio,stock)
 values ('Hongos', 40, 50);
 insert into ingredientes (Nombre,precio,stock)
 values ('Salami', 40, 50);
+insert into ingredientes (Nombre,precio,stock)
+values ('Peperoni', 70, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Cebolla', 15, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Jamon', 80, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Aceituna', 100, 20);
+select * from ingredientes
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,10,2,40)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,2,2,24)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,11,2,24)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,1,2,10)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,12,2,160)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,9,2,80)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(4,9,2,200)
+
+insert into ingredientes (Nombre,precio,stock)
+values ('Salchicha Especial', 100, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Salchicha De Pollo', 100, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Cebolla Picada', 10, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Chorizo Mexicano', 50, 20);
+insert into ingredientes (Nombre,precio,stock)
+values ('Jalapeño', 10, 20);
+
+
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(5,10,2,40)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(5,14,2,200)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(5,15,2,200)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(5,13,2,10)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(5,16,2,160)
+
+
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(3,7,2,90)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(3,12,2,160)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(8,10,2,160)
+
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(6,10,2,140)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(6,17,2,160)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(6,18,2,160)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(6,1,2,160)
+insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
+values(6,13,2,160)
+select * from ingredientes
+select * from crearProducto
+select * from producto where idCategoria=1
+
+
+
+
+
+
+
+
+
 
 insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
 values(1,1,2,10)
@@ -82,4 +159,5 @@ values(1,6,1,30)
 
 insert into crearProducto (idProducto,idIngrediente,cantidadIngrediente,precioIngrediente) 
 values(1,7,1,30)
-select * from crearProducto
+
+select * from producto

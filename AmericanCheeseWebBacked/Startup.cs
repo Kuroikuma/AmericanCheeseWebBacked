@@ -39,7 +39,9 @@ namespace AmericanCheeseWebBacked
                                   builder =>
                                   {
                                       builder.WithOrigins("http://localhost:3000",
-                                                          "http://www.contoso.com");
+                                                          "http://www.contoso.com")
+                                                          .AllowAnyHeader()
+                                                          .AllowAnyMethod();
                                   });
             });
             services.AddControllers();

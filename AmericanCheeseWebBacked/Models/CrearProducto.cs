@@ -17,5 +17,6 @@ namespace AmericanCheeseWebBacked.Models
 
         public virtual Ingredientes IdIngredienteNavigation { get; set; }
         public virtual Producto IdProductoNavigation { get; set; }
+       
     }
 }
